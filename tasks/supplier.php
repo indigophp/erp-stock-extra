@@ -20,7 +20,7 @@ class Supplier
 
 		// Job data
 		$data = array(
-			'id' => $id,
+			'id'     => $id,
 			'cached' => (bool)\Cli::option('cached', \Cli::option('c', false)),
 			'method' => $method
 		);
