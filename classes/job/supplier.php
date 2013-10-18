@@ -24,7 +24,7 @@ class Job_Supplier
 		}
 		else
 		{
-			$log->error('Runtime error during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
+			$log->error('Runtime error in file ' . $e->getFile() . ' on line ' . $e->getLine() . ' during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
 		}
 		return true;
 	}
