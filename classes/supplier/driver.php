@@ -201,7 +201,7 @@ abstract class Supplier_Driver
 			else
 			{
 				// Foolproofness: removing some fields from insert data
-				\Arr::filter_keys($product, array('id', 'product_id'), true);
+				$product = \Arr::filter_keys($product, array('id', 'product_id'), true);
 
 				\Arr::set($product, array(
 					'external_id' => $id,
