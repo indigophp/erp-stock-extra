@@ -16,7 +16,7 @@ class Create_suppliers
 			'created_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
 			'updated_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
 
-		), array('id'));
+		), array('id'), false, 'InnoDB');
 	}
 
 	public function down()

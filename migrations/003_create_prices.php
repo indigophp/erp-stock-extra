@@ -20,7 +20,7 @@ class Create_prices
 			'updated_at'  => array('constraint' => 11, 'type' => 'int', 'null' => true),
 			'deleted_at'  => array('constraint' => 11, 'type' => 'int', 'null' => true),
 
-		), array('id'));
+		), array('id'), false, 'InnoDB');
 	}
 
 	public function down()

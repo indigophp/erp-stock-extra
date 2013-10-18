@@ -11,7 +11,7 @@ class Create_supplier_meta
 			'supplier_id' => array('constraint' => 11, 'type' => 'int', 'unsigned' => true),
 			'key'         => array('constraint' => 255, 'type' => 'varchar'),
 			'value'       => array('type' => 'text', 'null' => true),
-		), array('id'));
+		), array('id'), false, 'InnoDB');
 
 		\DBUtil::add_foreign_key('supplier_meta', array(
 			'constraint' => 'supplier_meta_id_suppliers_id',
