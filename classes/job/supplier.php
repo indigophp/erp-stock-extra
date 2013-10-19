@@ -26,7 +26,7 @@ class Job_Supplier
 		}
 		else
 		{
-			$log->error('Runtime error in file ' . $e->getFile() . ' on line ' . $e->getLine() . ' during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
+			$log->critical('Runtime error in file ' . $e->getFile() . ' on line ' . $e->getLine() . ' during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
 		}
 
 		if ($trace)
