@@ -50,6 +50,9 @@ class Supplier
 				$handler->setFormatter($formatter);
 				$logger->pushHandler($handler);
 
+				// Add other handlers to logger through Event trigger
+				\Event::instance('queue')->trigger('logger', $logger);
+
 				$queue = array('supplier', array('driver' => 'direct', 'logger' => $logger));
 			}
 			else
