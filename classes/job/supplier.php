@@ -8,7 +8,6 @@ class Job_Supplier
 
 	public function execute($job, $data)
 	{
-		ini_set('default_socket_timeout', 1000);
 		$sup = Supplier::forge($data['id']);
 		$sup->{\Arr::get($data, 'method', 'change')}(\Arr::get($data, 'cached', false));
 	}
