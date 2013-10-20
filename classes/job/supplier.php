@@ -17,21 +17,17 @@ class Job_Supplier
 		$log = $job->getLogger();
 		$payload = $job->getPayload();
 
-		$trace = \Arr::get($payload, 'data.trace', false);
-
 		if ($e instanceof SupplierException)
 		{
 			$log->critical('Supplier error during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
 		}
 		else
 		{
-			$log->critical('Runtime error in file ' . $e->getFile() . ' on line ' . $e->getLine() . ' during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
+			$log->critical('Runtime error during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
 		}
 
-		if ($trace)
-		{
-			throw $e;
-		}
+		// Log trace
+		$log->debug($e->getTraceAsString());
 
 		return false;
 	}

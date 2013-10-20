@@ -14,11 +14,12 @@ class Job_Supplier_Update extends Job_Supplier
 		// Do not update some fields
 		$set = \Arr::filter_keys($data, array('external_id', 'supplier_id'), true);
 
-		\Arr::set($data, 'updated_at', time());
+		$data['updated_at'] = time();
+
 		return Model_Price::query()
 			->set($set)
-			->where('external_id', \Arr::get($data, 'external_id'))
-			->where('supplier_id', \Arr::get($data, 'supplier_id'))
+			->where('external_id', $data['external_id'])
+			->where('supplier_id', $data['supplier_id'])
 			->update();
 	}
 }
