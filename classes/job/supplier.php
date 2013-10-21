@@ -31,10 +31,10 @@ class Job_Supplier
 		else
 		{
 			$log->critical('Runtime error during execution of job: ' . $payload['job'] . ' (' .get_class($e) . ': ' . $e->getMessage() .  ')', array('payload' => $payload));
-		}
 
-		// Log trace
-		$log->debug($e->getTraceAsString());
+			// Log trace
+			$log->debug($e->getTraceAsString());
+		}
 
 		return false;
 	}
