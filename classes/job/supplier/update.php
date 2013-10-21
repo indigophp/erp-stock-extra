@@ -8,8 +8,9 @@ class Job_Supplier_Update extends Job_Supplier
 
 	public function execute($job, $data)
 	{
-		// Trigger price update/change event
-		\Event::instance('supplier')->trigger('update', $data);
+		// Trigger price update/change event and modify data
+		$data = \Event::instance('supplier')->trigger('update', $data, 'array');
+		$data = call_user_func_array('\\Arr::merge_assoc', $data);
 
 		// This is all about update
 		$data = $data[0];
