@@ -6,6 +6,13 @@ class Job_Supplier
 {
 	public $delete = true;
 
+	public function __construct()
+	{
+		// Reset connection
+		$instance = \Config::get('db.active', 'default');
+		unset(\Database_Connection::$instances[$instance]);
+	}
+
 	public function execute($job, $data)
 	{
 		$sup = Supplier::forge($data['id']);
