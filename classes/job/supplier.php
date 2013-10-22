@@ -16,7 +16,18 @@ class Job_Supplier
 	public function execute($job, $data)
 	{
 		$sup = Supplier::forge($data['id']);
-		$sup->{\Arr::get($data, 'method', 'change')}(\Arr::get($data, 'cached', false));
+
+		switch (\Arr::get($data, 'method', 'change'))
+		{
+			case 'update':
+				$sup->update(\Arr::get($data, 'cached', false), \Arr::get($data, 'force', false));
+				break;
+
+			case 'change':
+			default:
+				$sup->change(\Arr::get($data, 'cached', false));
+				break;
+		}
 	}
 
 	public function failure($job, $e)

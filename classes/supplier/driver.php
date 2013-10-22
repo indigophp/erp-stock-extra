@@ -110,9 +110,10 @@ abstract class Supplier_Driver
 	 * Update existing products, insert new ones
 	 *
 	 * @param	boolean		$cached		Update from already downloaded files
+	 * @param	boolean		$force		Force update of all values
 	 * @return	boolean 				All products have been processed
 	 */
-	public function update($cached = false)
+	public function update($cached = false, $force = false)
 	{
 		// Get data from supplier
 		if( ! $products = $this->_update($cached))
@@ -156,7 +157,7 @@ abstract class Supplier_Driver
 			if (array_key_exists($id, $price))
 			{
 				// Check if product's price has been changed, or just became (un)available
-				if ($product['price'] !== $price[$id]['price'])
+				if ($product['price'] !== $price[$id]['price'] or $force === true)
 				{
 					// Method for updating meta fields as well
 					$fields = $this->get_config('update.fields', array());

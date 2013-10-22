@@ -22,7 +22,7 @@ class Supplier
 		$data = array(
 			'id'     => $id,
 			'cached' => (bool)\Cli::option('cached', \Cli::option('c', false)),
-			'trace'  => (bool)\Cli::option('trace', \Cli::option('t', false)),
+			'force'  => (bool)\Cli::option('force', \Cli::option('f', false)),
 			'method' => $method
 		);
 
