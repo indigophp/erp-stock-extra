@@ -158,9 +158,12 @@ abstract class Supplier_Driver
 				// Check if product's price has been changed, or just became (un)available
 				if ($product['price'] !== $price[$id]['price'])
 				{
+					// Method for updating meta fields as well
+					$fields = $this->get_config('update.fields', array());
+					$fields = \Arr::merge($fields, array('price', 'available'));
+
 					// Foolproofness: set the update array manually
-					// TODO: Method for updating meta fields as well
-					$product = \Arr::filter_keys($product, array('price', 'available'));
+					$product = \Arr::filter_keys($product, $fields);
 
 					\Arr::set($product, array(
 						'external_id' => $id,
