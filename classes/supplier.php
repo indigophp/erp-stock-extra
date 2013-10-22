@@ -74,7 +74,7 @@ class Supplier
 			throw new \FuelException('Could not find Supplier driver: ' . $driver);
 		}
 
-		$config = \Arr::merge(static::$_defaults, \Config::get('supplier.drivers.' . $driver, array()), $config);
+		$config = \Arr::merge(static::$_defaults, \Config::get('supplier.drivers.' . strtolower($driver), array()), $config);
 
 		$driver = new $class($model, $config);
 
