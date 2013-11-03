@@ -10,11 +10,11 @@ class Model_Price extends \Orm\Model_Soft
 	);
 
 	protected static $_observers = array(
-		'Orm\Observer_CreatedAt' => array(
+		'Orm\\Observer_CreatedAt' => array(
 			'events'          => array('before_insert'),
 			'mysql_timestamp' => false,
 		),
-		'Orm\Observer_UpdatedAt' => array(
+		'Orm\\Observer_UpdatedAt' => array(
 			'events'          => array('before_update'),
 			'mysql_timestamp' => false,
 		),

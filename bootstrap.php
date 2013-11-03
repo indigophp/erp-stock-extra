@@ -1,6 +1,9 @@
 <?php
 
 Autoloader::add_classes(array(
+	'Indigo\\Erp\\Stock\\Model_Product'          => __DIR__ . '/classes/model/product.php',
+	'Indigo\\Erp\\Stock\\HasOne'          => __DIR__ . '/classes/hasone.php',
+
 	'Indigo\\Erp\\Stock\\Model_Price'            => __DIR__ . '/classes/model/price.php',
 	'Indigo\\Erp\\Stock\\Model_Supplier'         => __DIR__ . '/classes/model/supplier.php',
 	'Indigo\\Erp\\Stock\\Model_Supplier_Meta'    => __DIR__ . '/classes/model/supplier/meta.php',
