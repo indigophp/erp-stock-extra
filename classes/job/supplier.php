@@ -41,7 +41,7 @@ class Job_Supplier
 		}
 		else
 		{
-			$log->critical('Runtime error during execution of job: {job} (' .get_class($e) . ': ' . $e->getMessage() .  ') Data: ' . json_encode($payload['data'], $payload);
+			$log->critical('Runtime error during execution of job: {job} (' .get_class($e) . ': ' . $e->getMessage() .  ') Data: ' . json_encode($payload['data']), $payload);
 
 			// Log trace
 			$log->debug($e->getTraceAsString());
