@@ -37,11 +37,11 @@ class Job_Supplier
 
 		if ($e instanceof SupplierException)
 		{
-			$log->critical('Supplier error during execution of job: {job} (' . $e->getMessage() .  ') Data: {data}', $payload);
+			$log->critical('Supplier error during execution of job: {job} (' . $e->getMessage() .  ') Data: ' . json_encode($payload['data']), $payload);
 		}
 		else
 		{
-			$log->critical('Runtime error during execution of job: {job} (' .get_class($e) . ': ' . $e->getMessage() .  ') Data: {data}', $payload);
+			$log->critical('Runtime error during execution of job: {job} (' .get_class($e) . ': ' . $e->getMessage() .  ') Data: ' . json_encode($payload['data'], $payload);
 
 			// Log trace
 			$log->debug($e->getTraceAsString());
