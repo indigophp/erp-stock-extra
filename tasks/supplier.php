@@ -40,8 +40,7 @@ class Supplier
 
 				// Get original handler
 				$handler = $logger->popHandler();
-				$formatter = new \Monolog\Formatter\ContextLineFormatter("%level_name% - %datetime% --> %message% - %context%".PHP_EOL, "Y-m-d H:i:s");
-				$handler->setFormatter($formatter);
+				$handler->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
 				$logger->pushHandler($handler);
 
 				// Console handler
