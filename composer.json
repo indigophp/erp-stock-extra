@@ -1,20 +1,16 @@
 {
-    "name": "indigo-soft/indigo-erp-stock-extra",
-    "type": "fuel-package",
-    "description": "Indigo Stock management extra for Indigo ERP and Webshop",
-    "homepage": "http://github.com/indigo-soft",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Márk Sági-Kazár",
-            "email": "mark.sagikazar@gmail.com"
-        }
-    ],
-    "require": {
-        "indigo-soft/indigo": "dev-master",
-        "indigo-soft/indigo-erp-stock": "dev-master"
-    },
-    "extra": {
-        "installer-name": "erp-stock-extra"
-    }
+	"name": "indigophp/erp-stock-extra",
+	"type": "fuel-package",
+	"description": "Indigo Stock management extra for Indigo ERP and Webshop",
+	"homepage": "http://indigophp.com",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Márk Sági-Kazár",
+			"email": "mark.sagikazar@gmail.com"
+		}
+	],
+	"require": {
+		"indigophp/erp-stock": "dev-master"
+	}
 }
