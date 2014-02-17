@@ -16,7 +16,7 @@ class Model_Supplier extends \Orm\Model
 			'model_to'       => 'Model_Supplier_Meta',
 			'cascade_delete' => true,
 		),
-		'price'
+		'prices'
 	);
 
 	protected static $_observers = array(

@@ -2,6 +2,9 @@
 
 namespace Fuel\Tasks;
 
+use Infigo\Queue\Connector\DirectConnector;
+use \Indigo\Queue\Queue;
+
 class Supplier
 {
 	/**
@@ -29,56 +32,42 @@ class Supplier
 		// Execute job immediately
 		$execute = (bool)\Cli::option('execute', \Cli::option('e', false));
 
-		// Use Queue if available (greater performance)
-		if (\Package::loaded('queue'))
+		// Create queue data
+		if ($execute)
 		{
-			// Create queue data
-			if ($execute)
-			{
-				// Initialize logger
-				$logger = clone \Log::instance();
+			// Initialize logger
+			$logger = clone \Log::instance();
 
-				// Get original handler
-				$handler = $logger->popHandler();
-				$handler->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
-				$logger->pushHandler($handler);
+			// Get original handler
+			$handler = $logger->popHandler();
+			$handler->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
+			$logger->pushHandler($handler);
 
-				// Console handler
-				$handler = new \Monolog\Handler\ConsoleHandler(\Monolog\Logger::NOTICE);
-				$formatter = new \Monolog\Formatter\LineFormatter("%message% - %context%".PHP_EOL, "Y-m-d H:i:s");
-				$handler->setFormatter($formatter);
-				$logger->pushHandler($handler);
+			// Console handler
+			$handler = new \Monolog\Handler\ConsoleHandler(\Monolog\Logger::NOTICE);
+			$formatter = new \Monolog\Formatter\LineFormatter("%message% - %context%".PHP_EOL, "Y-m-d H:i:s");
+			$handler->setFormatter($formatter);
+			$logger->pushHandler($handler);
 
-				// Add other handlers to logger through Event trigger
-				\Event::instance('queue')->trigger('logger', $logger);
+			// Add other handlers to logger through Event trigger
+			\Event::instance('queue')->trigger('logger', $logger);
 
-				$queue = array('supplier', array('driver' => 'direct', 'logger' => $logger));
-			}
-			else
-			{
-				$queue = 'supplier';
-			}
-
-			$options = array(
-				'delay' => $delay,
-				'ttr'   => $ttr
-			);
-
-			// Push job and data to queue
-			\Queue::push($queue, 'Indigo\\Erp\\Stock\\Job_Supplier', $data, $options);
+			$connector = new DirectConnector();
 		}
 		else
 		{
-			try
-			{
-				$job = new Job_Supplier();
-				return $job->execute(null, $data);
-			}
-			catch (\Exception $e)
-			{
-				// TODO: process exceptions
-			}
+			$connector = \Config::get('queue.queues.supplier');
 		}
+
+		$options = array(
+			'delay' => $delay,
+			'ttr'   => $ttr
+		);
+
+		$queue = new Queue('supplier', $connector);
+
+		// Push job and data to queue
+		$queue->push('Indigo\\Erp\\Stock\\Job_Supplier', $data, $options);
 	}
 
 	/**

@@ -31,8 +31,8 @@ class Supplier
 	 */
 	public static function forge($supplier, $config = array())
 	{
-
 		$model = Model_Supplier::query();
+
 		if (is_int($supplier))
 		{
 			$model = $model->where('id', $supplier)->get_one();

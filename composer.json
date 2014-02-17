@@ -11,6 +11,7 @@
 		}
 	],
 	"require": {
-		"indigophp/erp-stock": "dev-master"
+		"indigophp/erp-stock": "dev-master",
+		"indigophp/fuel-queue": "dev-master",
 	}
 }

@@ -28,7 +28,9 @@ class Model_Price extends \Orm\Model_Soft
 		'product_id',
 		'supplier_id',
 		'external_id',
-		'price',
+		'price' => array(
+			'data_type' => 'currency',
+		),
 		'available' => array(
 			'default' => 1,
 			'data_type' => 'int'
@@ -47,4 +49,11 @@ class Model_Price extends \Orm\Model_Soft
 	);
 
 	protected static $_table_name = 'prices';
+
+	public static function _init()
+	{
+		\Orm\Observer_Typing::$type_methods['currency']['after'] = function ($value, array $settings) {
+			return \Num::currency($value);
+		};
+	}
 }
